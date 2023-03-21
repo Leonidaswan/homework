@@ -1,48 +1,15 @@
+//
+//author: wanlukuan
+//data: 2023-3-5
 #include <QApplication>
+#include <memory>
 
-#include <QtWidgets>
+#include "finddialog.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QDialog *finddialog = new QDialog;
-    finddialog->setWindowTitle("Find");
-
-    QLabel *label = new QLabel("Find &what:");
-    QLineEdit *lineEdit = new QLineEdit;
-    label->setBuddy(lineEdit);
-
-    QCheckBox *caseCheckBOX = new QCheckBox("Match &case");
-    QCheckBox *backwardCheckBox = new QCheckBox("Search &backward");
-
-    QPushButton *findButton = new QPushButton("&Find");
-    findButton->setDefault(true);
-    findButton->setEnabled(false);
-
-    QPushButton *closeButton = new QPushButton("&Close");
-
-    QHBoxLayout *topLeftLayout = new QHBoxLayout;
-    topLeftLayout->addWidget(label);
-    topLeftLayout->addWidget(lineEdit);
-
-    QVBoxLayout *leftLayout = new QVBoxLayout;
-    leftLayout->addLayout(topLeftLayout);
-    leftLayout->addWidget(caseCheckBOX);
-    leftLayout->addWidget(backwardCheckBox);
-
-    QVBoxLayout *rightLayout = new QVBoxLayout;
-    rightLayout->addWidget(findButton);
-    rightLayout->addWidget(closeButton);
-    rightLayout->addStretch();
-
-    QHBoxLayout *mainLayout = new QHBoxLayout;
-    mainLayout->addLayout(leftLayout);
-    mainLayout->addLayout(rightLayout);
-
-    finddialog->setLayout(mainLayout);
-
-    QObject::connect(closeButton, SIGNAL(clicked(bool)),
-            &a, SLOT(quit()));
+    auto finddialog = std::make_unique<FindDialog>();
 
     finddialog->show();
     return a.exec();

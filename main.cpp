@@ -1,15 +1,16 @@
-// main function
-// author:wanlukuan
-// date: 2023-3-15
+//
+// Author:wanlukuan
+// Date:2023-3-18
 
-#include "gotocelldialog.h"
+#include "sortdialog.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    GoToCellDialog w;
-    w.show();
+    SortDialog *dialog = new SortDialog;
+    dialog->setColumnRange('C','F');
+    dialog->show();
     return a.exec();
 }

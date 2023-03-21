@@ -24,12 +24,12 @@ private slots:
     void findClicked();
     void enableFindButton(const QString &text);
 
-private:
-    QLabel *_label;
-    QLineEdit *_lineEdit;
-    QCheckBox *_caseCheckBOX;
-    QCheckBox *_backwardCheckBox;
-    QPushButton *_findButton;
-    QPushButton *_closeButton;
+//private:
+//    QLabel *_label;
+//    QLineEdit *_lineEdit;
+//    QCheckBox *_caseCheckBOX;
+//    QCheckBox *_backwardCheckBox;
+//    QPushButton *_findButton;
+//    QPushButton *_closeButton;
 };
 #endif // FINDDIALOG_H

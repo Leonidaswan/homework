@@ -1,4 +1,4 @@
-//Improved join and variable assignment
+//use object tree to realize.
 //author: wanlukuan
 //data: 2023-3-5
 #include "finddialog.h"
@@ -6,31 +6,37 @@
 #include <QtGui>
 
 FindDialog::FindDialog(QWidget *parent)
-    : QDialog(parent),
-    _label{new QLabel(tr("Find &what:"))},
-    _lineEdit{new QLineEdit},
-    _caseCheckBOX{new QCheckBox(tr("Match &case"))},
-    _backwardCheckBox{new QCheckBox(tr("Search &backward"))},
-    _findButton{new QPushButton(tr("&Find"))},
-    _closeButton{new QPushButton(tr("&Close"))}
+    : QDialog(parent)
 {
-    _label->setBuddy(_lineEdit);
+    new QLabel{"Find &what:",this};
+    new QLineEdit{this};
+    new QCheckBox{"Match &case",this};
+    new QCheckBox{"Search &backward",this};
+    new QPushButton{"&Find",this};
+    new QPushButton{"&Close",this};
 
-    _findButton->setDefault(true);
-    _findButton->setEnabled(false);
+    auto label = this->findChild<QLabel *>();
+    auto lineEdit = this->findChild<QLineEdit *>();
+    auto checkBox = this->findChildren<QCheckBox *>();
+    auto pushButton = this->findChildren<QPushButton *>();
+
+    label->setBuddy(lineEdit);
+
+    pushButton[0]->setDefault(true);
+    pushButton[0]->setEnabled(false);
 
     QHBoxLayout *topLeftLayout = new QHBoxLayout;
-    topLeftLayout->addWidget(_label);
-    topLeftLayout->addWidget(_lineEdit);
+    topLeftLayout->addWidget(label);
+    topLeftLayout->addWidget(lineEdit);
 
     QVBoxLayout *leftLayout = new QVBoxLayout;
     leftLayout->addLayout(topLeftLayout);
-    leftLayout->addWidget(_caseCheckBOX);
-    leftLayout->addWidget(_backwardCheckBox);
+    leftLayout->addWidget(checkBox[0]);
+    leftLayout->addWidget(checkBox[1]);
 
     QVBoxLayout *rightLayout = new QVBoxLayout;
-    rightLayout->addWidget(_findButton);
-    rightLayout->addWidget(_closeButton);
+    rightLayout->addWidget(pushButton[0]);
+    rightLayout->addWidget(pushButton[1]);
     rightLayout->addStretch();
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
@@ -40,21 +46,22 @@ FindDialog::FindDialog(QWidget *parent)
     setWindowTitle("Find");
     setFixedHeight(sizeHint().height());
 
-    connect(_lineEdit, &QLineEdit::textChanged,
+    connect(lineEdit, &QLineEdit::textChanged,
             this, &FindDialog::enableFindButton);
-    connect(_findButton, &QPushButton::clicked,
+    connect(pushButton[0], &QPushButton::clicked,
             this, &FindDialog::findClicked);
-    connect(_closeButton, &QPushButton::clicked,
+    connect(pushButton[1], &QPushButton::clicked,
             this, &FindDialog::close);
 }
 
 void FindDialog::findClicked()
 {
-    QString text = _lineEdit->text();
+    QString text = this->findChild<QLineEdit *>()->text();
+    auto cb = this->findChildren<QCheckBox *>();
     Qt::CaseSensitivity cs =
-        _caseCheckBOX->isChecked() ? Qt::CaseSensitive
-                                  : Qt::CaseInsensitive;
-    if(_backwardCheckBox->isChecked()){
+        cb[0]->isChecked() ? Qt::CaseSensitive
+                           : Qt::CaseInsensitive;
+    if(cb[1]->isChecked()){
         emit findPrevious(text, cs);
     }else{
         emit findNext(text, cs);
@@ -63,7 +70,8 @@ void FindDialog::findClicked()
 
 void FindDialog::enableFindButton(const QString &text)
 {
-    _findButton->setEnabled(!text.isEmpty());
+    auto pb = this->findChildren<QPushButton *>();
+    pb[0]->setEnabled(!text.isEmpty());
 }
 
 FindDialog::~FindDialog()

@@ -1,16 +1,15 @@
-//
-//author: wanlukuan
-//data: 2023-3-5
-#include <QApplication>
-#include <memory>
+// main function
+// author:wanlukuan
+// date: 2023-3-15
 
-#include "finddialog.h"
+#include "gotocelldialog.h"
+
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    auto finddialog = std::make_unique<FindDialog>();
-
-    finddialog->show();
+    GoToCellDialog w;
+    w.show();
     return a.exec();
 }

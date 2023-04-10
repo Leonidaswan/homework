@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QLabel>
+#include <QPushButton>
 
 class Window : public QWidget
 {
@@ -16,5 +17,6 @@ public:
 
 private:
     QLabel *_label;
+//    QPushButton *_button;
 };
 #endif // WINDOW_H

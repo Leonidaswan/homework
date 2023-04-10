@@ -1,6 +1,7 @@
 #include "label.h"
 #include <QMouseEvent>
 #include <QDebug>
+#include "button.h"
 
 Label::Label(QWidget *parent)
     : QLabel{parent}
@@ -9,6 +10,8 @@ Label::Label(QWidget *parent)
     setBackgroundRole(QPalette::Dark);
     setAutoFillBackground(true);
 
+    _button = new Button{this};
+//    _button->setGeometry(0,0,80,30);
 }
 
 bool Label::event(QEvent *e)

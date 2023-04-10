@@ -2,6 +2,7 @@
 #define LABEL_H
 
 #include <QLabel>
+#include <QPushButton>
 
 class Label : public QLabel
 {
@@ -10,6 +11,9 @@ public:
     Label(QWidget *parent = nullptr);
 
     virtual bool event(QEvent *e)override;
+
+private:
+    QPushButton *_button;
 
 };
 

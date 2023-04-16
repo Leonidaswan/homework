@@ -12,9 +12,6 @@ public:
 
     virtual bool event(QEvent *e)override;
 
-private:
-    QPushButton *_button;
-
 };
 
 #endif // LABEL_H

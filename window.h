@@ -13,10 +13,8 @@ public:
     Window(QWidget *parent = nullptr);
     ~Window();
 
-    virtual bool event(QEvent *event)override;
-
 private:
     QLabel *_label;
-//    QPushButton *_button;
+    QPushButton *_button;
 };
 #endif // WINDOW_H

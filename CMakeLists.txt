@@ -13,7 +13,8 @@ target_sources(eventhandling
         main.cpp
         window.cpp
         window.h
-        label.h label.cpp
+        button.cpp
+        button.h
         
     PUBLIC
         

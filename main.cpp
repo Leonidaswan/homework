@@ -1,16 +1,19 @@
-//
-//author: wanlukuan
-//data: 2023-3-5
-#include <QApplication>
-#include <memory>
+// use QtDesigner to design ui
+// Author: wanlukuan
+// Date: 2023-3-5
 
-#include "finddialog.h"
+#include <QApplication>
+#include "ui_finddialog.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    auto finddialog = std::make_unique<FindDialog>();
+    Ui::Bridge uib;
 
-    finddialog->show();
+    QDialog finddialog;
+
+    uib.setupUi(&finddialog);
+
+    finddialog.show();
     return a.exec();
 }

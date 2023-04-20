@@ -13,7 +13,8 @@ target_sources(finddialog
 
         main.cpp
         finddialog.ui
-        
+        finddialog.h finddialog.cpp
+
     PUBLIC
         
 )

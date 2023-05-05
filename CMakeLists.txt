@@ -1,45 +1,40 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(spreadsheet VERSION 0.1 LANGUAGES CXX)
+project(notepad VERSION 0.1 LANGUAGES CXX)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 qt_standard_project_setup()
 
-qt_add_executable(spreadsheet)
+qt_add_executable(notepad)
 
-target_include_directories( spreadsheet PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-
-target_sources(spreadsheet
+target_sources(notepad
     PRIVATE
         main.cpp
-        cell.cpp    cell.h
-        spreadsheet.cpp spreadsheet.h
-        finddialog.cpp  finddialog.h
-        gotocelldialog.cpp  gotocelldialog.h    gotocell.ui
-        sortdialog.cpp  sortdialog.h    sort.ui
-
-        window.cpp  window.h    window.ui
-
-        images.qrc
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
+        icons.qrc
         
     PUBLIC
         
 )
 
-set_target_properties( spreadsheet PROPERTIES AUTORCC on )
+set_target_properties(notepad PROPERTIES AUTORCC on)
 
-target_compile_features(spreadsheet PRIVATE cxx_std_20)
+target_compile_features(notepad PRIVATE cxx_std_20)
 
 # Define target properties for Android with Qt 6 as:
-#    set_property(TARGET sourcefile APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
+#    set_property(TARGET notepad APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 
+find_package(Qt6 REQUIRED COMPONENTS PrintSupport)
 
-target_link_libraries(spreadsheet
+target_link_libraries(notepad 
     PRIVATE 
         Qt6::Widgets
+        Qt6::PrintSupport
 )
 
 
@@ -83,9 +78,7 @@ target_link_libraries(spreadsheet
 
 
 
-
-
-# set_target_properties(sourcefile PROPERTIES
+# set_target_properties(notepad PROPERTIES
 #     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
 #     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
 #     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -93,19 +86,19 @@ target_link_libraries(spreadsheet
 #     WIN32_EXECUTABLE TRUE
 # )
 
-# install(TARGETS sourcefile
+# install(TARGETS notepad
 #     BUNDLE DESTINATION .
 #     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 # if(QT_VERSION_MAJOR EQUAL 6)
-#     qt_finalize_executable(sourcefile)
+#     qt_finalize_executable(notepad)
 # endif()
 
 
 
 
 
-#qt_add_executable(sourcefile)  //Creates and finalizes an application target of a platform-specific type.
+#qt_add_executable(notepad)  //Creates and finalizes an application target of a platform-specific type.
 #This command performs the following tasks:
 
 #    1. Create a CMake target of the appropriate type for the target platform.
